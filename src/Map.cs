@@ -3,8 +3,8 @@ using System.Text;
 class Map
 {
 	private static string[] map;
-	public static int Width;
-	public static int Height;
+	private static int mapWidth;
+	private static int mapHeight;
 
 	public static void LoadMap()
 	{
@@ -14,28 +14,29 @@ class Map
 		// Load in the map
 		map = File.ReadAllLines("./map.txt");
 
-		Width = map.OrderBy(line => line.Length).First().Length;
-		Height = map.Length;
-	}
-
-	public static int GetMapX()
-	{
-		// Find the longest line in the map
-		//? +2 is 1 to get us past the length, and 1 for padding
-		int longest = map.OrderBy(line => line.Length).First().Length;
-		return longest + 2;
+		// Set the width and height
+		mapWidth = map.OrderBy(line => line.Length).First().Length;
+		mapHeight = map.Length;
 	}
 
 	public static void DisplayMap()
 	{
+		// Get the X position that we need to start drawing at
+		// based on the width of the map and the console
+		int drawingX = (Console.WindowWidth - mapWidth) / 2;
+
 		// Loop over every character/coordinate in the map
-		for (int y = 0; y < Height; y++)
+		for (int y = 0; y < mapHeight; y++)
 		{
-			for (int x = 0; x < Width; x++)
+			// Move over to the correct x offset so that
+			// we can draw the map in the centre of the screen
+			Console.CursorLeft = drawingX;
+
+			for (int x = 0; x < mapWidth; x++)
 			{
 				// Get the color based on if its day or
 				// night for the current area then draw it
-				Console.ForegroundColor = GetColorFromTerminatorLine(x, y, Width, Height);
+				Console.ForegroundColor = GetColorFromTerminatorLine(x, y);
 
 				// Check for if there is any known people and
 				// highlight their locations
@@ -63,7 +64,7 @@ class Map
 		Console.ResetColor();
 	}
 
-	public static int GetHeightFromTerminatorLine(int x, int mapWidth, int mapHeight)
+	public static int GetHeightFromTerminatorLine(int x)
 	{
 		// Get the current UTC time, and use that to 
 		// adjust the position of the map as the sun
@@ -89,31 +90,16 @@ class Map
 		return Convert.ToInt32(Math.Abs(y));
 	}
 
-	public static ConsoleColor GetColorFromTerminatorLine(int x, int y, int mapWidth, int mapHeight)
+	public static ConsoleColor GetColorFromTerminatorLine(int x, int y)
 	{
 		// Check for if the current position is inside or
 		// outside the terminator line (day or right)
-		int lineY = GetHeightFromTerminatorLine(x, mapWidth, mapHeight);
+		int lineY = GetHeightFromTerminatorLine(x);
 
 		// If we're blow the line then its night
 		if (y <= lineY) return ConsoleColor.DarkGray;
 
 		// Otherwise its day
 		return ConsoleColor.Gray;
-	}
-
-	//! debug remove
-	public static ConsoleColor GetColorFromTerminatorLineDebug(int x, int y, int mapWidth, int mapHeight)
-	{
-		// Check for if the current position is inside or
-		// outside the terminator line (day or right)
-		int lineY = GetHeightFromTerminatorLine(x, mapWidth, mapHeight);
-
-		// If we're above the line then its day
-		// if (y <= lineY) return ConsoleColor.Green;
-		if (y <= lineY) return ConsoleColor.Yellow;
-
-		// If we're not any of that then its night
-		return ConsoleColor.Magenta;
 	}
 }
