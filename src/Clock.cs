@@ -31,8 +31,10 @@ class Clock
 
 		// If there are people to display,
 		// then display them in a table
-		if (DataHandler.People.Count < 1) return;
-		Console.WriteLine();
-		Table.DisplayTimes();
+		if (DataHandler.People.Count > 0)
+		{
+			Console.WriteLine();
+			Table.DisplayTimes();
+		}
 	}
 }

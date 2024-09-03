@@ -12,7 +12,7 @@ class Map
 		Console.OutputEncoding = Encoding.UTF8;
 
 		// Load in the map
-		map = File.ReadAllLines("./map.txt");
+		map = DataHandler.GetMap();
 
 		// Set the width and height
 		mapWidth = map.OrderBy(line => line.Length).First().Length;
