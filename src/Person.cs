@@ -27,7 +27,7 @@ class Person
 // TODO: or make visual input thingy with move arrow keys idk
 class MapLocation
 {
-	// 1 based index
+	// 1 based index (is adjusted when drawing)
 	public int X { get; set; } // Column
 	public int Y { get; set; } // Line
 }

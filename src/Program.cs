@@ -3,19 +3,19 @@
 
 	public static void Main(string[] args)
 	{
-		// Load everything
+		// Load everything and also hide
+		// the cursor because its ugly as
+		Console.CursorVisible = false;
 		DataHandler.GetTimes();
 		Map.LoadMap();
 
-		// Draw the map
-		Map.DisplayMap();
+		// Get the height that we should redraw
+		// everything at when we refresh everything
+		int initialY = Console.CursorTop;
 
-		// If there aren't any people in the map then
-		// don't show them (nothing to show)
-		if (DataHandler.People.Count == 0) return; 
-
-		// Draw the map, and a bit of spacing to even it out
-		Console.WriteLine();
-		Clock.DisplayTimes();
+		// Display everything until the person
+		// presses a key to stop
+		Clock.DisplayLive(initialY);
+		Console.ReadKey(true);
 	}
 }
