@@ -74,19 +74,33 @@ class Map
 		double gmtOffset = utc / 12f;
 
 		/*
-			normalized version:		https://www.desmos.com/calculator/giz4rrerrw
-			dynamic version:		https://www.desmos.com/calculator/xsmt0asak1
+			normalized version:		https://www.desmos.com/calculator/ffrvmrjscn
+			dynamic version:		https://www.desmos.com/calculator/czfiuwirqj
 
 			Shout out Eve for helping
 		*/
 
 		// Plot the curve thing
+		//? -1 makes sure we only go downwards
 		double height = -1d * mapHeight;
 		
+		//? dividing by x scales it to tht width
+		//? Width is divided by 2 because ascii isn't a square (rectangle)
 		double width = x / (mapWidth / 2d);
-		double xPosition = ((width + gmtOffset) % 2d) - 1;
 
-		double y = height / (Math.Pow(xPosition * 2, 8) + 1);
+		//? GMT offset is added to shift the line over
+		//? modulo 2 makes it repeat, and -1 makes it "reflect" so we
+		//? we get the entire curve and not just half of it
+		double xPosition = ((width + gmtOffset) % 2d) - 1d;
+
+		//? times by 2 because this only plots half the curve
+		//? 8 shows the curve. Anything thats a multiple of 2 (2, 4, 6, 8, etc)
+		//? will give the same "shape", but the number decides the "strength"
+		//? +1 applies the height
+		double y = height / (Math.Pow(xPosition * 2d, 8d) + 1d);
+
+		//? Return the y as absolute because we calculate as negative
+		//? Using convert and not casting because casting truncates, and convert rounds
 		return Convert.ToInt32(Math.Abs(y));
 	}
 
