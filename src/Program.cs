@@ -11,11 +11,16 @@
 
 		// Get the height that we should redraw
 		// everything at when we refresh everything
+		// TODO: Mess around with the buffer height to allow running with history
 		int initialY = Console.CursorTop;
 
-		// Display everything until the person
-		// presses a key to stop
+		// Display everything live
 		Clock.DisplayLive(initialY);
+
+		// If bro presses a key then stop
+		// updating live and also give them
+		// their cursor back
 		Console.ReadKey(true);
+		Console.CursorVisible = true;
 	}
 }
