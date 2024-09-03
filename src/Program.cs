@@ -3,18 +3,19 @@
 
 	public static void Main(string[] args)
 	{
-		// First load the JSON stuff
-		// and load in the map
+		// Load everything
 		DataHandler.GetTimes();
 		Map.LoadMap();
 
-		// Then draw the map, a bit of padding
-		// and the table of people & times
+		// Draw the map
 		Map.DisplayMap();
+
+		// If there aren't any people in the map then
+		// don't show them (nothing to show)
+		if (DataHandler.People.Count == 0) return; 
+
+		// Draw the map, and a bit of spacing to even it out
 		Console.WriteLine();
 		Clock.DisplayTimes();
-
-		//! debug
-		Console.ReadLine();
 	}
 }

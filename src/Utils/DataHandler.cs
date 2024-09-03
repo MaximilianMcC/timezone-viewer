@@ -32,12 +32,6 @@ class DataHandler
 		{
 			// Create new default data to and chuck it in a string
 			People = new List<Person>();
-			People.Add(new Person() {
-				Name = "Christopher Luxon",
-				Location = "Wellington, New Zealand",
-				TimeZoneName = "New Zealand Standard Time",
-				MapLocation = new MapLocation() { X = 81, Y = 16 }
-			});
 			string data = JsonSerializer.Serialize(People);
 
 			// Save it to the file
