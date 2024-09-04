@@ -7,16 +7,17 @@ class Person
 	public MapLocation MapLocation { get; set; }
 	public string TimeZoneName { get; set; }
 
-	public DateTime GetCurrentTime()
+	public DateTimeOffset GetCurrentTime()
 	{
 		// Get bros timezone
 		// TODO: Don't get the timezone into each time. make custom parser
-		TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneName);
+		TimeZoneInfo timezone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneName);
 		
 		// Get the current UTC time and add the 
 		// persons offset to the time for them rn
-		DateTime utcTime = DateTime.UtcNow;
-		DateTime currentTime = utcTime + timeZone.BaseUtcOffset;
+		//? using DateTimeOffset because DateTime has no timezone info in it
+		DateTimeOffset utcTime = DateTimeOffset.Now;
+		DateTimeOffset currentTime = TimeZoneInfo.ConvertTime(utcTime, timezone);
 
 		// Return the time
 		return currentTime;
