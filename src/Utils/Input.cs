@@ -14,6 +14,7 @@ class Input
 		return input;
 	}
 
+	
 
 	public static bool IsCloseMatch(string inputWord, string wordToMatch, float matchPercentage = 0.4f)
 	{

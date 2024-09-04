@@ -3,24 +3,24 @@
 
 	public static void Main(string[] args)
 	{
-		// Load everything and also hide
-		// the cursor because its ugly as
-		Console.CursorVisible = false;
+		// Load everything
 		DataHandler.GetTimes();
 		Map.LoadMap();
 
+		Editor.AddPerson();
+
 		// Get the height that we should redraw
 		// everything at when we refresh everything
-		// TODO: Mess around with the buffer height to allow running with history
 		int initialY = Console.CursorTop;
 
 		// Display everything live
+		Console.CursorVisible = false;
 		Clock.DisplayLive(initialY);
 
 		// If bro presses a key then stop
 		// updating live and also give them
 		// their cursor back
-		Console.ReadKey(true);
 		Console.CursorVisible = true;
+		Console.ReadKey(true);
 	}
 }
