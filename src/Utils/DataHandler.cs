@@ -65,8 +65,9 @@ class DataHandler
 		People = JsonSerializer.Deserialize<List<Person>>(json);
 	}
 
-	private static void SaveTimes()
+	public static void SaveTimes()
 	{
+		// Turn the people to a stringm then write it to the file
 		string json = JsonSerializer.Serialize(People);
 		File.WriteAllText(GetJsonPath(), json);
 	}

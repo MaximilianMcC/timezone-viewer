@@ -14,7 +14,11 @@ class Input
 		return input;
 	}
 
-	
+	public static void CentreText(string text)
+	{
+		Console.CursorLeft = (Console.WindowWidth - text.Length) / 2;
+		Console.WriteLine(text);
+	}
 
 	public static bool IsCloseMatch(string inputWord, string wordToMatch, float matchPercentage = 0.4f)
 	{

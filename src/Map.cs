@@ -2,9 +2,9 @@ using System.Text;
 
 class Map
 {
-	private static string[] map;
-	private static int mapWidth;
-	private static int mapHeight;
+	public static string[] MapFile;
+	public static int Width;
+	public static int Height;
 
 	public static void LoadMap()
 	{
@@ -12,27 +12,27 @@ class Map
 		Console.OutputEncoding = Encoding.UTF8;
 
 		// Load in the map
-		map = DataHandler.GetMap();
+		MapFile = DataHandler.GetMap();
 
 		// Set the width and height
-		mapWidth = map.OrderBy(line => line.Length).First().Length;
-		mapHeight = map.Length;
+		Width = MapFile.OrderBy(line => line.Length).First().Length;
+		Height = MapFile.Length;
 	}
 
 	public static void DisplayMap()
 	{
 		// Get the X position that we need to start drawing at
 		// based on the width of the map and the console
-		int drawingX = (Console.WindowWidth - mapWidth) / 2;
+		int drawingX = (Console.WindowWidth - Width) / 2;
 
 		// Loop over every character/coordinate in the map
-		for (int y = 0; y < mapHeight; y++)
+		for (int y = 0; y < Height; y++)
 		{
 			// Move over to the correct x offset so that
 			// we can draw the map in the centre of the screen
 			Console.CursorLeft = drawingX;
 
-			for (int x = 0; x < mapWidth; x++)
+			for (int x = 0; x < Width; x++)
 			{
 				// Get the color based on if its day or
 				// night for the current area then draw it
@@ -52,7 +52,7 @@ class Map
 				}
 
 				// Draw the character
-				Console.Write(map[y][x]);
+				Console.Write(MapFile[y][x]);
 			}
 
 			// Move onto the next line
@@ -82,11 +82,11 @@ class Map
 
 		// Plot the curve thing
 		//? -1 makes sure we only go downwards
-		double height = -1d * mapHeight;
+		double height = -1d * Height;
 		
 		//? dividing by x scales it to tht width
 		//? Width is divided by 2 because ascii isn't a square (rectangle)
-		double width = x / (mapWidth / 2d);
+		double width = x / (Width / 2d);
 
 		//? GMT offset is added to shift the line over
 		//? modulo 2 makes it repeat, and -1 makes it "reflect" so we
