@@ -7,8 +7,6 @@
 		DataHandler.GetTimes();
 		Map.LoadMap();
 
-		Editor.AddPerson();
-
 		// Get the height that we should redraw
 		// everything at when we refresh everything
 		int initialY = Console.CursorTop;

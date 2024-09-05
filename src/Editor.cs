@@ -25,6 +25,30 @@ class Editor
 		DataHandler.SaveTimes();
 	}
 
+	public static void RemovePerson()
+	{
+		// TODO: Use arrow menu
+		//! looks ass rn (will make look better)
+		
+		// Loop over every person registered
+		// and write their index so they can be
+		// referenced for deletion
+		for (int i = 0; i < DataHandler.People.Count; i++)
+		{
+			Console.WriteLine($"{i + 1}\t{DataHandler.People[i].Name}");
+		}
+
+		// Check for what index they put in
+		// TODO: Chuck in input class
+		Console.Write("Index to delete: ");
+		ConsoleKeyInfo input = Console.ReadKey();
+		int index = int.Parse(input.KeyChar.ToString()) - 1;
+
+		// Remove bro, then save the JSON
+		DataHandler.People.RemoveAt(index);
+		DataHandler.SaveTimes();
+	}
+
 	private static string GetTimezone()
 	{
 		// First get all of the time zones registered rn
@@ -46,17 +70,17 @@ class Editor
 			// they've guessed close enough
 			foreach (TimeZoneInfo timezone in timezones)
 			{
-				// If >= 40% of the words are correct then
+				// If >= 20% of the words are correct then
 				// say that its good enough and use the
 				// timezone thingy as the accepted one
 				// TODO: Check for what has the highest percentage, because rn its biased to the index yk
-				if (Input.IsCloseMatch(input, timezone.Id.ToLower(), 0.4f)) return timezone.Id;
+				if (Input.IsCloseMatch(input, timezone.Id.ToLower(), 0.2f)) return timezone.Id;
 			}
 
 			// They weren't close at all. Pull a tanty
 			// and ask for another input
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine("Couldn't find a timezone with that name");
+			Console.WriteLine("Couldn't find a timezone with that name!");
 			Console.ResetColor();
 		}
 	}
