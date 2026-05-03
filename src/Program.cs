@@ -11,8 +11,20 @@
 		if (args.Length == 1)
 		{
 			string option = args[0].ToLower().Trim();
+			
 			if (option == "add") Editor.AddPerson();
 			if (option == "remove") Editor.RemovePerson();
+			if (option == "json")
+			{
+				Console.WriteLine(DataHandler.GetJsonPath());
+				return;
+			}
+			if (option == "map")
+			{
+				Console.WriteLine(DataHandler.GetMapPath());
+				return;
+			}
+
 			Console.Clear();
 		}
 
