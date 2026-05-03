@@ -7,7 +7,7 @@ class Editor
 	{
 		// Get all of the persons info
 		string name = Input.GetString("Name: ");
-		string location = Input.GetString("Location: ");
+		string location = Input.GetString("Location Label: ");
 		string timezoneName = GetTimezone();
 		MapLocation mapLocation = GetMapLocation();
 
@@ -59,7 +59,7 @@ class Editor
 		while (true)
 		{
 			// Get the input
-			string input = Input.GetString("timezone name: ").ToLower();
+			string input = Input.GetString("Timezone name: ").ToLower();
 
 			// First check for if bros put in a flawless input
 			bool valid = TimeZoneInfo.TryFindSystemTimeZoneById(input, out _);
