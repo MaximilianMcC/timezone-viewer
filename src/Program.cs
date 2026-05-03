@@ -7,6 +7,15 @@
 		DataHandler.GetTimes();
 		Map.LoadMap();
 
+		// Check for if we wanna add someone
+		if (args.Length == 1)
+		{
+			string option = args[0].ToLower().Trim();
+			if (option == "add") Editor.AddPerson();
+			if (option == "remove") Editor.RemovePerson();
+			Console.Clear();
+		}
+
 		// Get the height that we should redraw
 		// everything at when we refresh everything
 		int initialY = Console.CursorTop;
