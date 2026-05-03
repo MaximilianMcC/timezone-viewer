@@ -30,6 +30,7 @@ timezones map
 
 ## Uninstalling
 To get rid of it then you've just gotta delete the exe file. But before you do that then run either `map` or `json` to get the path of the json and map files so you can get rid of that directory. They take up like maybe 10 kb max so its chill if you forget though
+
 ---
 
 > [!WARNING]  
